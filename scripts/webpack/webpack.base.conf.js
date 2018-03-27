@@ -13,8 +13,8 @@ console.log(project);
 
 //server代码中不需要打包的模块
 function _externals() {
-    let dependencies = require(`../../${project}/server/package.json`).dependencies
-    let externals = {}
+    let dependencies = require(`../../${project}/server/package.json`).dependencies;
+    let externals = {};
     for (let dep in dependencies) {
         externals[dep] = 'commonjs ' + dep
     }
@@ -165,7 +165,7 @@ const serverWebpackConfig = {
     resolve: {
         extensions: ['.js', '.json']
     }
-}
+};
 
 module.exports = {
     client: clientWebpackConfig,

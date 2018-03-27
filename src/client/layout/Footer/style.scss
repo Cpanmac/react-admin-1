@@ -1,0 +1,15 @@
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  .copyright{
+
+  }
+  padding: 0 16px;
+  margin: 48px 0 24px;
+  text-align: center;
+}
