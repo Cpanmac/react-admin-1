@@ -1,0 +1,74 @@
+@import "../../styles/func";
+@import "../../styles/mixin";
+#result{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  .status-wrapper{
+    width: 100%;
+    padding-top: r(86);
+  }
+  .status-icon{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: r(36);
+    img{
+      width: r(76);
+    }
+  }
+  .status-desc {
+    font-size: r(18);
+    color: #4A4A4A;
+    text-align: center;
+  }
+  .status-tips{
+    font-size: r(14);
+    color: #999999;
+    text-align: center;
+    margin-top: r(10);
+  }
+  .operate-wrapper {
+    padding: r(10) r(18);
+    //@include opx-border(top, #E5E5E5);
+    //@include opx-border(bottom, #E5E5E5);
+    height: r(64);
+    width: 100%;
+    display: flex;
+  }
+  .margin-top-277 {
+    margin-top: r(277);
+  }
+
+  .progress-bar{
+    margin-top: r(42);
+    margin-bottom: r(13);
+  }
+  .btn{
+    border-radius: r(4);
+    font-size: r(16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    height: r(44);
+  }
+  .try-again{
+    background: #0677DA;
+    width: 100%;
+  }
+  .go-home,
+  .more-production{
+    width: r(160);
+    background: #FFFFFF;
+    border: 1px solid #0677DA;
+    color: #0677DA;
+    margin-right: auto;
+  }
+  .look-money{
+    width: r(160);
+    background: #0677DA;
+  }
+
+}
