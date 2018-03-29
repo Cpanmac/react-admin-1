@@ -1,14 +1,7 @@
 // base lib
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import { allReducer as allStates } from './index'
-// 导入 actions
-import * as userActions from '../common/user/actions'
-
-// 将actions 加入自动导入对象
-const allActions = {
-    userActions,
-};
+import { allReducer as allStates, allActions } from './index'
 
 // 基础Redux 忽略大小写的匹配方式
 const baseReduxConfig = ['user', 'app'];

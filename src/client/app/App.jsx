@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import '../styles/index.scss'
 import './style.scss'
 import MLayout from '../layout'
 import {Breadcrumb} from 'antd';
 
-class App extends Component {
+class App extends PureComponent {
     constructor(props) {
         super(props);
     }
@@ -14,7 +14,7 @@ class App extends Component {
         return (
             <div id='app-container'>
                 <MLayout>
-                    <Breadcrumb separator="/" routes={routes} params={params}/>
+                    <Breadcrumb routes={[routes[0]]} params={params}/>
                     {this.props.children}
                 </MLayout>
             </div>

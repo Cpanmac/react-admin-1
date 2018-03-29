@@ -2,6 +2,7 @@
 module.exports = [
     {
         path: '/',
+        key: 'app',
         component: require('../app/App'),
         childRoutes: [
             {
@@ -11,6 +12,7 @@ module.exports = [
             }
         ],
         indexRoute: {
+            key: 'result',
             component: require('../pages/result'),
         }
     },
