@@ -6,6 +6,7 @@ module.exports = [
         childRoutes: [
             {
                 path: 'result',
+                breadcrumbName: 'result',
                 component: require('../pages/result'),
             }
         ],

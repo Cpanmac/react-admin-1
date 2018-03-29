@@ -9,40 +9,41 @@ exports.cssLoaders = (options = {}) => {
     // generate loader string to be used with extract text plugin
     const generateLoaders = loaders => {
         const sourceLoader = loaders.map(loader => {
-            let extraParamChar
+            let extraParamChar;
             if (/\?/.test(loader)) {
-                loader = loader.replace(/\?/, '-loader?')
+                loader = loader.replace(/\?/, '-loader?');
                 extraParamChar = '&'
             } else {
-                loader = loader + '-loader'
+                loader = loader + '-loader';
                 extraParamChar = '?'
             }
             return loader + (options.sourceMap ? extraParamChar + 'sourceMap' : '')
-        }).join('!')
+        }).join('!');
 
         // Extract CSS when that option is specified
         if (options.extract) {
+            let _options = {
+                use: sourceLoader,
+                fallback: 'style-loader',
+            };
+
             if (options.publicPath) {
-                return ExtractTextPlugin.extract({
-                    use: sourceLoader,
-                    fallback: 'style-loader',
+                _options = Object.assign(_options, {
                     publicPath: options.publicPath
-                })
-            } else {
-                return ExtractTextPlugin.extract({
-                    use: sourceLoader,
-                    fallback: 'style-loader',
-                })
+                });
             }
+            return ExtractTextPlugin.extract(_options);
+
         } else {
             return ['style-loader', sourceLoader].join('!')
         }
-    }
+    };
 
     return {
         css: generateLoaders(['css', 'postcss']),
         postcss: generateLoaders(['css']),
-        less: generateLoaders(['css', 'less']),
+        // less: generateLoaders(['css', `less?{modifyVars: {"@icon-url": '"/src/client/iconfont/iconfont"',}}`]),
+        less: generateLoaders(['css', `less`]),
         sass: generateLoaders(['css', 'postcss', 'sass?indentedSyntax']),
         scss: generateLoaders(['css', 'postcss', 'sass']),
         stylus: generateLoaders(['css', 'stylus']),
@@ -52,11 +53,11 @@ exports.cssLoaders = (options = {}) => {
 
 // Generate loaders for standalone style files
 exports.styleLoaders = options => {
-    const output = []
-    const loaders = exports.cssLoaders(options)
+    const output = [];
+    const loaders = exports.cssLoaders(options);
 
     for (const extension of Object.keys(loaders)) {
-        const loader = loaders[extension]
+        const loader = loaders[extension];
         output.push({
             test: new RegExp('\\.' + extension + '$'),
             loader: loader

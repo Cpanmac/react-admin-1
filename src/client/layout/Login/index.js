@@ -1,12 +1,10 @@
 import React, {PureComponent} from 'react'
-
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 
 const FormItem = Form.Item;
 
-
 import Footer from '../Footer'
-import './style.scss'
+import './style.less'
 
 
 class Login extends PureComponent {
@@ -28,12 +26,15 @@ class Login extends PureComponent {
         const { getFieldDecorator } = this.props.form;
         return (
             <div id='login'>
-                <div className='content'>
-                    <div className="form-wrapper">
+                <Row
+                     type='flex'
+                     align='middle'
+                     justify='center'
+                     className='content'>
+
+                    <Col span={12} xs={24} className="form-wrapper">
                         <div className="icon">
-                            <Icon type="gitlab" style={{
-                                fontSize: '70px'
-                            }} />
+                            <Icon type="gitlab" style={{fontSize: '70px'}} />
                         </div>
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <FormItem>
@@ -74,8 +75,8 @@ class Login extends PureComponent {
                                 Or <a>register now!</a>
                             </FormItem>
                         </Form>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
                 <Footer/>
             </div>
         )

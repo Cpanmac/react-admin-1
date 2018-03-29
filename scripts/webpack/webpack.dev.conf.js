@@ -93,7 +93,9 @@ const clientWebpackConfig = merge(baseWebpackConfig.client, {
     chunkFilename: 'js/[name].chunk.js'
   },
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+    rules: utils.styleLoaders({
+        sourceMap: config.dev.cssSourceMap
+    })
   },
   resolve: {
     alias: {
@@ -101,6 +103,6 @@ const clientWebpackConfig = merge(baseWebpackConfig.client, {
     }
   },
   plugins: dependencyHandlers().concat(plugin)
-})
+});
 
 module.exports = [clientWebpackConfig, baseWebpackConfig.server]

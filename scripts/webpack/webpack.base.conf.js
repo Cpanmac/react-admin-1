@@ -102,7 +102,15 @@ const clientWebpackConfig = {
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                use: 'url-loader',
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            name: 'font/[name].[ext]',
+                            fallback: 'file-loader'
+                        }
+                    }
+                ],
             },
             {
                 test: /\.html$/,

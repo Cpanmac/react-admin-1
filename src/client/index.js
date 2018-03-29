@@ -4,6 +4,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { hashHistory } from 'react-router';
 import configureStore from './redux/store';
 import App from './app';
+import './iconfont/iconfont.css'
 
 
 const store = configureStore(hashHistory);

@@ -1,3 +1,3 @@
 {
-  "site":["zj","yzt"]
+  "site": ["yzt"]
 }
