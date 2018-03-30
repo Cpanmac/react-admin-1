@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import { Link, hashHistory } from 'react-router'
-import HeaderSearch from 'HeaderSearch'
+// import HeaderSearch from 'HeaderSearch'
 import classNames from 'classnames'
 import inject from '@inject'
 import './style.scss'
@@ -95,7 +95,7 @@ class Header extends PureComponent {
     onKeyDown = e => {
         if (e.key === 'Enter') {
             this.timeout = setTimeout(() => {
-                this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
+                // this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
             }, 0);
         }
     };
