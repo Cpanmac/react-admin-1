@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { hashHistory } from 'react-router';
+import { hashHistory, Router } from 'react-router';
+
+import routes from './route/index'
+import { Provider } from 'react-redux';
+
 import configureStore from './redux/store';
-import App from './app';
 import './iconfont/iconfont.css'
 
 
@@ -12,20 +15,21 @@ const store = configureStore(hashHistory);
 const history = syncHistoryWithStore(hashHistory,store);
 const rootElement = document.getElementById('app');
 
-const render = (Component,store,history) => {
+const render = () => {
     ReactDOM.render(
         // 利用Provider可以使我们的 store 能为下面的组件所用
-        <Component store={store} history={history}/>,
+        <Provider store={store}>
+            <Router routes={routes} history={history} />
+        </Provider>,
         rootElement
     );
 };
 
-render(App,store,history);
+render();
 
 if(module.hot){
-    module.hot.accept('./app', () => {
+    module.hot.accept('./app/index', () => {
         ReactDOM.unmountComponentAtNode(rootElement);
-        const App = require('./app');
-        render(App,store,history);
+        render();
     })
 }

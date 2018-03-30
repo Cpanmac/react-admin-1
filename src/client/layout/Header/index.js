@@ -73,9 +73,7 @@ class Header extends PureComponent {
     };
     render() {
         const menuEle = (
-            <Menu>
-                { this.state.menuConfig.map(menu => this.renderMenu(menu)) }
-            </Menu>
+            <Menu>{ this.state.menuConfig.map(menu => this.renderMenu(menu)) }</Menu>
         );
         const { avatar, username } = this.props.user;
         return (

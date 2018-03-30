@@ -3,7 +3,7 @@ module.exports = [
     {
         path: '/',
         key: 'app',
-        component: require('../app/App'),
+        component: require('../app/index'),
         childRoutes: [
             {
                 path: 'result',
