@@ -1,7 +1,9 @@
 import * as types from './constants'
 
 const initialState = {
-    stepInfo: ''
+    stepInfo: '',
+    avatar: '',
+    username: 'admin'
 };
 
 const user = (state = initialState, { type, data })=>{

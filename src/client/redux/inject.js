@@ -81,10 +81,9 @@ function creatRedux(data, src, type) {
  * actions的命名如上，文件夹名+Actions
  */
 export default function(options) {
+    options = [...arguments];
     return function(component) {
-        options = [...arguments];
         options = (options || ['self']).slice();
-
         let customize = [];
         // 提取定制化配置
         for(let i = 0; i < options.length; i++){
@@ -134,15 +133,19 @@ export default function(options) {
             }
         }
 
-        const mapState = (state) => {
+        const mapState = state => {
             let _baseStates = creatRedux(baseStates, state, 'state');
             let _allStates = creatRedux(allStates, state, 'state');
-            return filterRedux(_baseStates, _allStates);
+            const res = filterRedux(_baseStates, _allStates);
+            !res && console.error('没有找到可绑定的state');
+            return res || {};
         };
-        const mapDispatch = (dispatch) => {
+        const mapDispatch = dispatch => {
             let _baseActions = creatRedux(baseActions, dispatch);
             let _allActions = creatRedux(allActions, dispatch);
-            return filterRedux(_baseActions, _allActions);
+            const res = filterRedux(_baseActions, _allActions);
+            !res && console.error('没有找到可绑定的action');
+            return res || {};
         };
 
         return connect(mapState, mapDispatch)(component);

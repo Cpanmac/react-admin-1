@@ -1,0 +1,15 @@
+.mheader{
+  background: #fff;
+  padding: 0 16px 0 0;
+  display: flex;
+  .trigger{
+    margin-right: auto;
+  }
+  .avatar-wrapper{
+    transition: all 1s;
+    padding: 0 20px;
+  }
+  .avatar-wrapper:hover{
+    background-color: rgb(230, 247, 255);
+  }
+}
