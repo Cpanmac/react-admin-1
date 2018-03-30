@@ -5,7 +5,7 @@ promise.polyfill();
 
 //深拷贝
 const deepCopy = (obj,target) => {
-    for (var key in target) {
+    for (let key in target) {
         if(target.hasOwnProperty(key)){
             if (typeof target[key]==='object') {
                 obj[key] = deepCopy(target[key]);

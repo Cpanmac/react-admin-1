@@ -63,12 +63,13 @@ function creatRedux(data, src, type) {
 
 /**
  * 往组件中注入state和action
- * @param options array
+ * @param options 支持多个参数
  *
- * ['base','self','all', customize]
+ * 'base'|'common','self','all', customize(array)
+ *
  * base:基础数据，app，user
  * self:自己的reducer & actions
- * all: 所有的reducer & actions
+ * all: 所有的reducer & actions 不推荐
  *
  * customize: 一个string array，用于注入指定的某些Redux,
  *            参数是有Redux页面的文件夹(在pages下面)名字,
@@ -81,7 +82,8 @@ function creatRedux(data, src, type) {
  */
 export default function(options) {
     return function(component) {
-        options = (component.reduxConfig || options || ['self']).slice();
+        options = [...arguments];
+        options = (options || ['self']).slice();
 
         let customize = [];
         // 提取定制化配置
