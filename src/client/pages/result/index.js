@@ -13,8 +13,7 @@ class result extends PureComponent {
     render() {
         return (
             <div id="result">
-                result
-                <button onClick={this.doAction}>test</button>
+                发生的发生地方放放风
             </div>
         );
     }

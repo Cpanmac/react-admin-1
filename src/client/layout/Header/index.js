@@ -1,8 +1,13 @@
 import React, {PureComponent} from 'react'
-import { Link } from 'react-router'
+import { Link, hashHistory } from 'react-router'
+import HeaderSearch from 'HeaderSearch'
+import classNames from 'classnames'
 import inject from '@inject'
 import './style.scss'
-import { Layout, Menu, Icon, Dropdown, Avatar } from 'antd';
+import { Layout, Menu, Icon, Dropdown, Avatar, Input, Row, AutoComplete } from 'antd';
+import { hasLinkMenus } from '../MenuSider/menuConfig'
+
+let hasLinkMenusTexts = hasLinkMenus.map(menu => menu.text);
 
 @inject('base')
 class Header extends PureComponent {
@@ -28,6 +33,8 @@ class Header extends PureComponent {
                 link: '/login'
             },
         ],
+        dataSource: [],
+        searchMode: false,
     };
     renderMenuItem = menu => {
         const menuItemProps = {key: menu.key};
@@ -71,11 +78,56 @@ class Header extends PureComponent {
         }
         return this.renderMenuItem(menu);
     };
+
+    // 以下方法是搜索框的
+    handleSearchInput = value => {
+        if(!value) return;
+        const reg = new RegExp(value, 'i');
+        const dataSource = hasLinkMenusTexts.filter(menu => reg.test(menu));
+        this.setState({ dataSource });
+    };
+    handleOnSelect = value => {
+        const selectedMenu = hasLinkMenus.find(menu => menu.text === value);
+        if(selectedMenu && selectedMenu.link) {
+            hashHistory.push(selectedMenu.link);
+        }
+    };
+    onKeyDown = e => {
+        if (e.key === 'Enter') {
+            this.timeout = setTimeout(() => {
+                this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
+            }, 0);
+        }
+    };
+    onChange = value => {
+        this.setState({ value });
+        if (this.props.onChange) {
+            this.props.onChange();
+        }
+    };
+    enterSearchMode = () => {
+        this.setState({ searchMode: true }, () => {
+            if (this.state.searchMode) {
+                this.input.focus();
+            }
+        });
+    };
+    leaveSearchMode = () => {
+        this.setState({
+            searchMode: false,
+            value: '',
+        });
+    };
+
     render() {
         const menuEle = (
             <Menu>{ this.state.menuConfig.map(menu => this.renderMenu(menu)) }</Menu>
         );
         const { avatar, username } = this.props.user;
+        let avatarProps = !!avatar ? { src: avatar } : { icon: 'user' };
+        const inputClass = classNames('search-input', {
+            'show': this.state.searchMode,
+        });
         return (
             <Layout.Header className='mheader' >
                 <Icon
@@ -83,9 +135,23 @@ class Header extends PureComponent {
                     type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
                     onClick={this.props.toggle} />
 
+                <Row className='search-wrapper' onClick={this.enterSearchMode}>
+                    <Icon type='search'/>
+                    <AutoComplete
+                        className={inputClass}
+                        onSearch={this.handleSearchInput}
+                        onSelect={this.handleOnSelect}
+                        dataSource={this.state.dataSource}>
+                        <Input
+                            ref={node => this.input = node}
+                            onKeyDown={this.onKeyDown}
+                            onBlur={this.leaveSearchMode}/>
+                    </AutoComplete>
+                </Row>
+
                 <Dropdown overlay={menuEle} placement="bottomRight">
                     <div className='avatar-wrapper'>
-                        {!!avatar? <Avatar src={avatar}/> : <Avatar icon='user'/> }
+                        <Avatar {...avatarProps}/>
                         <span>&nbsp;&nbsp;{username}</span>
                     </div>
                 </Dropdown>

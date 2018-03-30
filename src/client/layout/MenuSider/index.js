@@ -13,9 +13,11 @@ class MenuSider extends PureComponent {
         MenuConfig: menuConfig,
     };
     renderMenuItem = menu => {
+        const menuItemProps = { key: menu.key };
+        menu.disabled && (menuItemProps['disabled'] = true);
         if(!!menu.link) {
             return (
-                <Menu.Item key={menu.key}>
+                <Menu.Item {...menu}>
                     <Link to={menu.link}>
                         {menu.icon?<Icon type={menu.icon} />:''}
                         {menu.text?<span>{menu.text}</span>:''}
@@ -24,7 +26,7 @@ class MenuSider extends PureComponent {
             );
         }
         return (
-            <Menu.Item key={menu.key}>
+            <Menu.Item {...menu}>
                 {menu.icon?<Icon type={menu.icon} />:''}
                 {menu.text?<span>{menu.text}</span>:''}
             </Menu.Item>

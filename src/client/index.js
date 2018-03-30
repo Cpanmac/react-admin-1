@@ -2,18 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { hashHistory, Router } from 'react-router';
-
-import routes from './route/index'
 import { Provider } from 'react-redux';
 
+import routes from './route/index'
 import configureStore from './redux/store';
 import './iconfont/iconfont.css'
+import './utils/axiosInit'
+
 
 
 const store = configureStore(hashHistory);
 // 创建一个增强版的history来结合store同步导航事件
 const history = syncHistoryWithStore(hashHistory,store);
 const rootElement = document.getElementById('app');
+
+
+
+
 
 const render = () => {
     ReactDOM.render(
