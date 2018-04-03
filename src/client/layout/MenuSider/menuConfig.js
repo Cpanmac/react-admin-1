@@ -19,7 +19,7 @@ const menuConfig = [
         icon: 'pie-chart',
         text: 'Login',
         link: {
-            pathname: 'result',
+            pathname: '/login',
             query: {
                 id: 1,
             }
@@ -37,12 +37,30 @@ const menuConfig = [
         children: [{
             key: 'sub1-1',
             text: 'Tom',
+            link: {
+                pathname: 'result',
+                query: {
+                    id: 'Tom',
+                }
+            },
         },{
             key: 'sub1-2',
             text: 'Bill',
+            link: {
+                pathname: 'result',
+                query: {
+                    id: 'Bill',
+                }
+            },
         },{
             key: 'sub1-3',
             text: 'Alex',
+            link: {
+                pathname: 'result',
+                query: {
+                    id: 'Alex',
+                }
+            },
         },]
     },
     {

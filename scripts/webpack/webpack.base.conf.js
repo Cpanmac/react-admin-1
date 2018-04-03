@@ -56,6 +56,7 @@ const clientWebpackConfig = {
         //import导入时别名
         alias: {
             '@client': path.resolve(`${project}/client`),
+            '@history': path.resolve(`${project}/client/route/history`),
             '@h5_commonr': path.resolve('h5_commonr'),
             '@noAnyDoor': path.resolve(`h5_commonr/noAnyDoor`),
             '@styles': path.resolve(`${project}/client/styles`),

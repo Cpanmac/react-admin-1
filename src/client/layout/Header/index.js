@@ -1,44 +1,27 @@
 import React, {PureComponent} from 'react'
-import { Link, hashHistory } from 'react-router'
+import { Link } from 'react-router'
+import history from '@history'
 // import HeaderSearch from 'HeaderSearch'
 import classNames from 'classnames'
 import inject from '@inject'
 import './style.scss'
 import { Layout, Menu, Icon, Dropdown, Avatar, Input, Row, AutoComplete } from 'antd';
 import { hasLinkMenus } from '../MenuSider/menuConfig'
+import accountMenuConfig from './accountMenuConfig'
 
 let hasLinkMenusTexts = hasLinkMenus.map(menu => menu.text);
 
 @inject('base')
 class Header extends PureComponent {
     state = {
-        menuConfig: [
-            {
-                key: '0',
-                disabled: true,
-                icon: 'user',
-                text: ' 个人中心',
-            },{
-                key: '1',
-                disabled: true,
-                icon: 'setting',
-                text: ' 设置',
-            },{
-                key: '2',
-                isDivider: true,
-            },{
-                key: '3',
-                icon: 'logout',
-                text: ' 登出',
-                link: '/login'
-            },
-        ],
+        menuConfig: accountMenuConfig,
         dataSource: [],
         searchMode: false,
     };
     renderMenuItem = menu => {
         const menuItemProps = {key: menu.key};
         menu.disabled && (menuItemProps['disabled'] = true);
+
         if(!!menu.link) {
             return (
                 <Menu.Item {...menuItemProps}>
@@ -89,7 +72,7 @@ class Header extends PureComponent {
     handleOnSelect = value => {
         const selectedMenu = hasLinkMenus.find(menu => menu.text === value);
         if(selectedMenu && selectedMenu.link) {
-            hashHistory.push(selectedMenu.link);
+            history.push(selectedMenu.link);
         }
     };
     onKeyDown = e => {
