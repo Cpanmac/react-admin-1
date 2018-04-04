@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
-import { Link } from 'react-router'
-import history from '@history'
+import { history, Link } from '@react-router'
 // import HeaderSearch from 'HeaderSearch'
 import classNames from 'classnames'
 import inject from '@inject'
