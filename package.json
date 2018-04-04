@@ -123,9 +123,6 @@
     "node": ">= 7.6.0",
     "npm": ">= 3.0.0"
   },
-  "theme": {
-    "icon-url": "src/client/iconfont/iconfont"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
