@@ -13,9 +13,8 @@ let prop = {
     value: axios,
     writable: false
 };
-
+// 挂载到react对象和window对象上
 Object.defineProperty(React, '$http', prop);
-Object.defineProperty(Component, '$http', prop);
-Object.defineProperty(PureComponent, '$http', prop);
-
-window.axios = axios;
+Object.defineProperty(React, 'axios', prop);
+Object.defineProperty(window, 'axios', prop);
+Object.defineProperty(window, '$http', prop);

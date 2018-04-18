@@ -22,7 +22,7 @@ const reactDll = {
                 'redux',
                 'react-router',
                 'classnames',
-                'antd',
+                // 'antd',
                 path.resolve('h5_commonr/noAnyDoor/jsrsasignc'),
             ],
             //针对开发本地调试用devPath，针对各种环境打包时用buildPath
