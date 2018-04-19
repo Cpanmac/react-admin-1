@@ -9,14 +9,45 @@ import { footerText } from '../common/data'
 
 import { Layout, Icon } from 'antd';
 const { Content, Footer } = Layout;
-
+const smallWindowWidth = 500;
 class MLayout extends PureComponent {
     constructor(props) {
         super(props);
     }
+
     state = {
         collapsed: false,
     };
+    /**
+     * 根据当前窗口宽度展开，收缩菜单栏
+     */
+    autoToggleMenuByWindowSize = () => {
+        const windowWidth = window.innerWidth;
+        const { collapsed } = this.state;
+
+        if(windowWidth < smallWindowWidth && !collapsed) {
+            this.setState({
+                collapsed: true,
+            })
+        } else if(windowWidth > smallWindowWidth && collapsed) {
+            this.setState({
+                collapsed: false,
+            })
+        }
+    };
+
+    componentDidMount() {
+        this.autoToggleMenuByWindowSize();
+    }
+
+    componentWillMount() {
+        window.addEventListener('resize', this.autoToggleMenuByWindowSize)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.autoToggleMenuByWindowSize)
+    }
+
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
