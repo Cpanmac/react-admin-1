@@ -5,17 +5,24 @@ const FormItem = Form.Item;
 
 import Footer from '../Footer'
 import './style.less'
-
+import UserBusiness from '@client/business/User'
+import User from "../../business/User";
 
 class Login extends PureComponent {
     constructor(props) {
         super(props);
     }
-    handleSubmit = (e) => {
+
+    componentWillMount() {
+        UserBusiness.doLogout();
+    }
+
+    login = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                UserBusiness.doLogin();
             }
         });
     };
@@ -36,7 +43,7 @@ class Login extends PureComponent {
                         <div className="icon">
                             <Icon type="gitlab" style={{fontSize: '70px'}} />
                         </div>
-                        <Form onSubmit={this.handleSubmit} className="login-form">
+                        <Form onSubmit={this.login} className="login-form">
                             <FormItem>
                                 {
                                     getFieldDecorator('userName', {
