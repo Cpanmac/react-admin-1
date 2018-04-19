@@ -9,6 +9,7 @@ import { getHasLinkMenus } from '../MenuSider/menuConfig'
 import accountMenuConfig from './accountMenuConfig'
 
 let hasLinkMenusTexts;
+let hasLinkMenus;
 
 @inject('base')
 class Header extends PureComponent {
@@ -23,7 +24,6 @@ class Header extends PureComponent {
         this.props.userActions.getUserInfo();
     }
     initHasLinkMenusTexts = () => {
-        let hasLinkMenus;
         hasLinkMenus = getHasLinkMenus();
         hasLinkMenusTexts = hasLinkMenus.map(menu => menu.text);
     };

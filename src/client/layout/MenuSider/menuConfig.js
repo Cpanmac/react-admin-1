@@ -85,28 +85,29 @@ const menuConfig = [
 
 export default menuConfig;
 
-const hasLinkMenus = [];
-/**
- * 获取菜单中有link元素的菜单，整理成数组输出，主要用于给顶部搜索栏提供数据
- * @param menus
- */
-const putHasLinkMenusBy = menus => {
-    menus.forEach(menu => {
-        if(!!menu.children) {
-            putHasLinkMenusBy(menu.children);
-        } else if(!!menu.link && !menu.disabled && Authority.isCurrentUserHasAuth(menu)) {
-            hasLinkMenus.push(menu);
-        }
-    });
-};
-
 const getHasLinkMenus = () => {
+    const hasLinkMenus = [];
+
+    /**
+     * 获取菜单中有link元素的菜单元素，放到数组中，
+     * 主要用于给顶部搜索栏提供数据
+     * @param menus
+     */
+    const putHasLinkMenusBy = menus => {
+        menus.forEach(menu => {
+            if(!!menu.children) {
+                putHasLinkMenusBy(menu.children);
+            } else if(!!menu.link && !menu.disabled && Authority.isCurrentUserHasAuth(menu)) {
+                hasLinkMenus.push(menu);
+            }
+        });
+    };
+
     putHasLinkMenusBy(menuConfig);
     return hasLinkMenus;
 };
 
 export {
-    hasLinkMenus,
     getHasLinkMenus
 };
 
