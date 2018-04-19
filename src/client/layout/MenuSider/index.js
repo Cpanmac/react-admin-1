@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import './style.scss'
-import { Link } from 'react-router'
+import { Link } from '@react-router'
+import Authority from '@client/business/Authority'
 import menuConfig from './menuConfig'
 
 import { Layout, Menu, Icon } from 'antd';
@@ -15,27 +16,30 @@ class MenuSider extends PureComponent {
     renderMenuItem = menu => {
         const menuItemProps = { key: menu.key };
         menu.disabled && (menuItemProps['disabled'] = true);
+        const AuthorityMenuItemHOC = Authority.createAuthorityFilterHOC(Menu.Item);
         if(!!menu.link) {
             return (
-                <Menu.Item {...menu}>
+                <AuthorityMenuItemHOC {...menu}>
                     <Link to={menu.link}>
                         {menu.icon?<Icon type={menu.icon} />:''}
                         {menu.text?<span>{menu.text}</span>:''}
                     </Link>
-                </Menu.Item>
+                </AuthorityMenuItemHOC>
             );
         }
         return (
-            <Menu.Item {...menu}>
+            <AuthorityMenuItemHOC {...menu}>
                 {menu.icon?<Icon type={menu.icon} />:''}
                 {menu.text?<span>{menu.text}</span>:''}
-            </Menu.Item>
+            </AuthorityMenuItemHOC>
         );
     };
     renderMenu = menu => {
-        if(!!menu.children) {
+        const AuthoritySubMenuHOC = Authority.createAuthorityFilterHOC(SubMenu);
+        const { children, ...rest } = menu;
+        if(!!children) {
             return (
-                <SubMenu key={menu.key} title = {menu.title}>
+                <AuthoritySubMenuHOC {...rest}>
                     {
                         menu.children.map(smenu => {
                             if(!!smenu.children){
@@ -45,7 +49,7 @@ class MenuSider extends PureComponent {
                             }
                         })
                     }
-                </SubMenu>
+                </AuthoritySubMenuHOC>
             )
         }
         return this.renderMenuItem(menu);
@@ -58,7 +62,7 @@ class MenuSider extends PureComponent {
                 collapsible
                 collapsed={this.props.collapsed}>
                 <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline">
                     {this.state.MenuConfig.map(menu => this.renderMenu(menu))}
                 </Menu>
             </Sider>

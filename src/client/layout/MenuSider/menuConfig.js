@@ -1,10 +1,11 @@
 import React from 'react'
 import { Icon } from 'antd'
+import Authority from '@client/business/Authority'
 
 const menuConfig = [
     {
         key: '01',
-        icon: 'baidu',
+        icon: 'apple',
         text: 'app',
         link: {
             pathname: '/',
@@ -12,12 +13,13 @@ const menuConfig = [
                 id: 1,
             }
         },
-        disabled: true,
+        disabled: false,
     },
     {
         key: '1',
         icon: 'pie-chart',
         text: 'Login',
+        disabled: true,
         link: {
             pathname: '/login',
             query: {
@@ -88,18 +90,23 @@ const hasLinkMenus = [];
  * 获取菜单中有link元素的菜单，整理成数组输出，主要用于给顶部搜索栏提供数据
  * @param menus
  */
-const getHasLinkMenus = (menus) => {
+const putHasLinkMenusBy = menus => {
     menus.forEach(menu => {
         if(!!menu.children) {
-            getHasLinkMenus(menu.children);
-        } else if(!!menu.link && !menu.disabled) {
+            putHasLinkMenusBy(menu.children);
+        } else if(!!menu.link && !menu.disabled && Authority.isCurrentUserHasAuth(menu)) {
             hasLinkMenus.push(menu);
         }
-    })
+    });
 };
 
-getHasLinkMenus(menuConfig);
+const getHasLinkMenus = () => {
+    putHasLinkMenusBy(menuConfig);
+    return hasLinkMenus;
+};
+
 export {
     hasLinkMenus,
+    getHasLinkMenus
 };
 

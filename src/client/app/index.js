@@ -3,14 +3,15 @@ import '../styles/index.scss'
 import './style.scss'
 import MLayout from '../layout'
 import {Breadcrumb} from 'antd'
-import UserBusiness from '../business/User'
+import inject from '@inject'
 
+@inject(['user'])
 class App extends PureComponent {
     constructor(props) {
         super(props);
     }
     render() {
-        UserBusiness.checkLoginStatus();
+        this.props.userActions.checkLoginStatus();
 
         const {routes, params} = this.props;
         return (

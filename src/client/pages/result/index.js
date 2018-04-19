@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import { Button, Table, Pagination } from 'antd'
+import { Table } from 'antd'
 import inject from '@inject'
 import './style.scss'
 import '../../mock/result'

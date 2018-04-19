@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import inject from '@inject'
 import './style.scss'
 import { Layout, Menu, Icon, Dropdown, Avatar, Input, Row, AutoComplete } from 'antd';
-import { hasLinkMenus } from '../MenuSider/menuConfig'
+import { getHasLinkMenus } from '../MenuSider/menuConfig'
 import accountMenuConfig from './accountMenuConfig'
 
-let hasLinkMenusTexts = hasLinkMenus.map(menu => menu.text);
+let hasLinkMenusTexts;
 
 @inject('base')
 class Header extends PureComponent {
@@ -17,6 +17,17 @@ class Header extends PureComponent {
         dataSource: [],
         searchMode: false,
     };
+
+    componentWillMount() {
+        this.initHasLinkMenusTexts();
+        this.props.userActions.getUserInfo();
+    }
+    initHasLinkMenusTexts = () => {
+        let hasLinkMenus;
+        hasLinkMenus = getHasLinkMenus();
+        hasLinkMenusTexts = hasLinkMenus.map(menu => menu.text);
+    };
+
     renderMenuItem = menu => {
         const menuItemProps = {key: menu.key};
         menu.disabled && (menuItemProps['disabled'] = true);

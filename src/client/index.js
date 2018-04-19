@@ -10,8 +10,9 @@ import configureStore from './redux/store';
 import './iconfont/iconfont.css'
 import './utils/axiosInit'
 
+// 暴露出全局store 方便非react组件对象可以调用
+export const store = configureStore(history);
 
-const store = configureStore(history);
 // 创建一个增强版的history来结合store同步导航事件
 const superHistory = syncHistoryWithStore(history,store);
 const rootElement = document.getElementById('app');

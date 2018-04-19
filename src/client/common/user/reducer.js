@@ -17,4 +17,5 @@ const user = (state = initialState, { type, data })=>{
     }
 };
 
+
 export default user;

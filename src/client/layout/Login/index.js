@@ -5,24 +5,24 @@ const FormItem = Form.Item;
 
 import Footer from '../Footer'
 import './style.less'
-import UserBusiness from '@client/business/User'
-import User from "../../business/User";
+import inject from '@inject'
 
+@inject(['user'])
 class Login extends PureComponent {
     constructor(props) {
         super(props);
     }
 
     componentWillMount() {
-        UserBusiness.doLogout();
+        this.props.userActions.deleteLoginInfo();
     }
 
-    login = (e) => {
+    login = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                UserBusiness.doLogin();
+                this.props.userActions.doLogin();
             }
         });
     };
