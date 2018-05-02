@@ -63,7 +63,7 @@
 
 ## 使用redux
 
-    在项目的页面中，有page模板，每一个page文件中有actions和reducer,constants
+    在项目的页面中，有page模板，每一个page文件中有actions和reducer,constants（可以参考/common>/user中的模板）
     想要使用这些actions和reducer数据，得先将actions和reducer暴露出来
     在/redux/index.js中导入actions和reducer并添加进allActions和allReducer中
     然后在页面中引入'@inject'依赖，然后使用注解的方式[@inject('base')]导入你需要的redux

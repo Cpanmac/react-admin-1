@@ -17,7 +17,7 @@ const getUserInfo = param => dispatch => {
 // 登陆业务
 const doLogin = param => dispatch => {
     console.log('doLogin');
-    saveLoginInfo();
+    // todo: 保存登陆信息;
 };
 const saveLoginInfo = param => dispatch => {
     console.log('_saveLoginInfo');
@@ -25,7 +25,7 @@ const saveLoginInfo = param => dispatch => {
 // 登出业务
 const doLogout = param => dispatch => {
     history.push('/login');
-    deleteLoginInfo();
+    // todo: 删除登陆状态
 };
 const deleteLoginInfo = param => dispatch => {
     console.log('_deleteLoginInfo');
