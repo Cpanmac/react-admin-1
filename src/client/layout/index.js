@@ -5,11 +5,11 @@ import './style.scss'
 import MenuSider from './MenuSider'
 // import Footer from './Footer'
 import Header from './Header'
-import { footerText } from '../common/data'
+import { footerText, smallWindowWidth } from '../common/data'
 
 import { Layout, Icon } from 'antd';
 const { Content, Footer } = Layout;
-const smallWindowWidth = 500;
+
 class MLayout extends PureComponent {
     constructor(props) {
         super(props);
